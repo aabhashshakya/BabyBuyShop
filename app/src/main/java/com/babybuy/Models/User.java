@@ -1,8 +1,8 @@
-package com.babybuy;
+package com.babybuy.Models;
 
 public class User {
 
-    String name, email, username, password;
+    private String name, email, username, password;
 
     public String getName() {
         return name;
