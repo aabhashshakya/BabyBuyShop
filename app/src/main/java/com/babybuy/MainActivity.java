@@ -23,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ItemAdapter adapter;
+    FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         adapter=new ItemAdapter(options);
         recyclerView.setAdapter(adapter);
+
+        floatingActionButton= (FloatingActionButton)findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(view -> startActivity(AddItems.getIntent(getApplicationContext())));
 
     }
 
