@@ -10,7 +10,7 @@
     android:gravity="center"
     tools:context=".AddItems">
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/addImage"
+        android:id="@+id/updateImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/addimage"
@@ -24,7 +24,7 @@
         android:layout_marginTop="10dp">
 
         <EditText
-            android:id="@+id/addName"
+            android:id="@+id/updateName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Item Name "
@@ -38,7 +38,7 @@
         android:layout_marginTop="10dp">
 
         <EditText
-            android:id="@+id/addPrice"
+            android:id="@+id/updatePrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Item Price "
@@ -52,10 +52,10 @@
         android:layout_marginTop="10dp">
 
         <EditText
-            android:id="@+id/addDis"
+            android:id="@+id/updateDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Item Dis..... "
+            android:hint="Enter Item Description "
             android:textSize="22sp"
             android:inputType="text"
             />
@@ -67,31 +67,14 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:text="Get Location"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:background="@drawable/rounded"
-            android:drawableLeft="@drawable/ic_baseline_add_location_24"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Patna Bihar India 803213"
-            android:layout_gravity="center"
-            android:textSize="22dp"
-            android:layout_marginStart="6dp"
-            android:textColor="@color/black"/>
     </LinearLayout>
     <Button
-        android:id="@+id/btn_addItems"
+        android:id="@+id/btn_updateItem"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="Click To Add Item "
+        android:text="Update Item"
         android:textSize="22sp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded"
-        android:drawableLeft="@drawable/ic_baseline_add_task_24"
         />
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.babybuy.adapter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,50 +51,52 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Item, ItemAdapter.myvie
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final DialogPlus dialogPlus=DialogPlus.newDialog(holder.image.getContext())
-                        .setContentHolder(new ViewHolder(R.layout.activity_edit_item))
-                        .setExpanded(true,1100)
-                        .create();
-
-                View myview=dialogPlus.getHolderView();
-                final EditText purl=myview.findViewById(R.id.updateImage);
-                final EditText name=myview.findViewById(R.id.updateName);
-                final EditText price=myview.findViewById(R.id.updatePrice);
-                final EditText description=myview.findViewById(R.id.updateDescription);
-                Button submit=myview.findViewById(R.id.btn_updateItems);
-
-                purl.setText(item.getImageURL());
-                name.setText(item.getName());
-                price.setText(item.getPrice());
-                description.setText(item.getDescription());
-
-                dialogPlus.show();
-
-                submit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Map<String,Object> map=new HashMap<>();
-                        map.put("imageURL",purl.getText().toString());
-                        map.put("name",name.getText().toString());
-                        map.put("price",price.getText().toString());
-                        map.put("description",description.getText().toString());
-
-                        FirebaseDatabase.getInstance().getReference().child("items")
-                                .child(getRef(position).getKey()).updateChildren(map)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        dialogPlus.dismiss();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        dialogPlus.dismiss();
-                                    }
-                                });
-                    }
-                });
+                Intent intent = new Intent (view.getContext(), EditItem.class);
+                view.getContext().startActivity(intent);
+//                final DialogPlus dialogPlus=DialogPlus.newDialog(holder.image.getContext())
+//                        .setContentHolder(new ViewHolder(R.layout.activity_edit_item))
+//                        .setExpanded(true,1100)
+//                        .create();
+//
+//                View myview=dialogPlus.getHolderView();
+//                final EditText purl=myview.findViewById(R.id.updateImage);
+//                final EditText name=myview.findViewById(R.id.updateName);
+//                final EditText price=myview.findViewById(R.id.updatePrice);
+//                final EditText description=myview.findViewById(R.id.updateDescription);
+//                Button submit=myview.findViewById(R.id.btn_updateItems);
+//
+//                purl.setText(item.getImageURL());
+//                name.setText(item.getName());
+//                price.setText(item.getPrice());
+//                description.setText(item.getDescription());
+//
+//                dialogPlus.show();
+//
+//                submit.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Map<String,Object> map=new HashMap<>();
+//                        map.put("imageURL",purl.getText().toString());
+//                        map.put("name",name.getText().toString());
+//                        map.put("price",price.getText().toString());
+//                        map.put("description",description.getText().toString());
+//
+//                        FirebaseDatabase.getInstance().getReference().child("items")
+//                                .child(getRef(position).getKey()).updateChildren(map)
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                });
+//                    }
+//                });
 
 
             }
