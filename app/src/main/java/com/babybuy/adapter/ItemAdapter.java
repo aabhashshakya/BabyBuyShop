@@ -42,6 +42,10 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Item, ItemAdapter.myvie
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (view.getContext(), EditItem.class);
+                intent.putExtra("itemName", item.getName());
+                intent.putExtra("itemDescription", item.getDescription());
+                intent.putExtra("itemPrice", item.getPrice());
+                intent.putExtra("itemURL", item.getImageURL());
                 view.getContext().startActivity(intent);
 
             }
@@ -88,7 +92,7 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Item, ItemAdapter.myvie
             }
         });
 
-        
+
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

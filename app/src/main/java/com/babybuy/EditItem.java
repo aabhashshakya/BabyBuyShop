@@ -32,6 +32,9 @@ public class EditItem extends AppCompatActivity {
     private EditText name, price, description;
     private ImageView imageView;
     private Uri imageUri;
+    String itemName;
+    String itemDescription;
+    String itemPrice;
 
     public static Intent getIntent(Context context) {
         return new Intent(context, EditItem.class);
@@ -41,46 +44,27 @@ public class EditItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_items);
+        Bundle extras = getIntent().getExtras();
+
+        imageUri = Uri.EMPTY;
+
+        if (extras != null) {
+             itemName = extras.getString("itemName");
+             itemDescription = extras.getString("itemDescription");
+             itemPrice = extras.getString("itemPrice");
+            imageUri = Uri.parse(extras.getString("itemPrice"));
+        }
 
         findId();
 
-        imageUri = Uri.EMPTY;
+        name.setText(itemName);
+        price.setText(itemPrice);
+        description.setText(itemDescription);
         imageView.setOnClickListener(this::pickImage);
         buttonAddItem.setOnClickListener(this::saveItem);
     }
 
     private void saveItem(View view) {
-        String itemName = name.getText().toString();
-        if (itemName.isEmpty()) {
-            name.setError("Name field is empty");
-            name.requestFocus();
-        }
-        double itemPrice = 0;
-        try {
-            itemPrice = Double.parseDouble(price.getText().toString());
-        } catch (NullPointerException e) {
-            Toast.makeText(
-                    getApplicationContext(),
-                    "Something wrong with price.",
-                    Toast.LENGTH_SHORT
-            ).show();
-        } catch (NumberFormatException e) {
-            Toast.makeText(
-                    getApplicationContext(),
-                    "Price should be a number",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
-        if (itemPrice <= 0) {
-            price.setError("Price should be greater than 0.");
-            price.requestFocus();
-        }
-        String itemDescription = description.getText().toString();
-        if(itemDescription.isEmpty()) {
-            description.setError("Description is empty.");
-            description.requestFocus();
-        }
-
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         currentFirebaseUser.getUid().toString();
 
