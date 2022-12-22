@@ -5,9 +5,11 @@ import android.net.Uri;
 import androidx.annotation.Nullable;
 
 public class Item {
+    private String userID;
     private String name, description;
     private String imageURL;
     private String price;
+    private Boolean isPurchased;
 
     public Item(String name, String description, String imageURL, String price) {
         this.name = name;
@@ -17,6 +19,39 @@ public class Item {
     }
 
     public Item() {
+    }
+
+    public Item(String name, String description, String imageURL, String price, Boolean isPurchased) {
+        this.name = name;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.isPurchased = isPurchased;
+    }
+
+    public Item(String userID, String name, String description, String imageURL, String price, Boolean isPurchased) {
+        this.userID = userID;
+        this.name = name;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.isPurchased = isPurchased;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public Boolean getIsPurchased() {
+        return isPurchased;
+    }
+
+    public void setIsPurchased(Boolean isPurchased) {
+        this.isPurchased = isPurchased;
     }
 
     public String getName() {

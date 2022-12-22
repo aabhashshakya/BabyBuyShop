@@ -44,9 +44,6 @@ public class AddItems extends AppCompatActivity {
 
         findId();
 
-//        store in firebase cloud
-
-
         imageUri = Uri.EMPTY;
         imageView.setOnClickListener(this::pickImage);
         buttonAddItem.setOnClickListener(this::saveItem);
@@ -93,6 +90,7 @@ public class AddItems extends AppCompatActivity {
         map.put("userID", currentFirebaseUser.getUid());
         map.put("description", description.getText().toString());
         map.put("imageURL", imageUri.toString());
+        map.put("isPurchased", false);
 
         FirebaseDatabase.getInstance().getReference().child("items").push()
                 .setValue(map)
