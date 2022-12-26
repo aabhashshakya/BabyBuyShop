@@ -36,6 +36,7 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Item, ItemAdapter.myvie
         holder.price.setText(item.getPrice().toString());
         holder.description.setText(item.getDescription());
          Glide.with(holder.image.getContext()).load(item.getImageURL()).into(holder.image);
+         holder.checkBox.setChecked(item.getIsPurchased());
 
         //edit button click
         holder.edit.setOnClickListener(new View.OnClickListener() {
@@ -51,32 +52,6 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Item, ItemAdapter.myvie
             }
         });
 
-
-        holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(holder.image.getContext());
-                builder.setTitle("Delete Panel");
-                builder.setMessage("Delete...?");
-
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("items")
-                                .child(getRef(position).getKey()).removeValue();
-                    }
-                });
-
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-
-                builder.show();
-            }
-        });
 
         holder.sms.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,10 +72,11 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Item, ItemAdapter.myvie
             @Override
             public void onClick(View view) {
                 if(item.getIsPurchased() == null || item.getIsPurchased() == false) {
-                    item.setIsPurchased(true);
+                    FirebaseDatabase.getInstance().getReference().child("items")
+                            .child(getRef(position).getKey()).child("isPurchased").setValue(true);
                 }else{
-                    item.setIsPurchased(false);
-                }
+                    FirebaseDatabase.getInstance().getReference().child("items")
+                            .child(getRef(position).getKey()).child("isPurchased").setValue(false);                }
             }
         });
     }
